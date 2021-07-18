@@ -6,8 +6,8 @@ SUBROUTINE_EntryPoint:
 
 SUBROUTINE_InitializeTMSS:
   MOVE.B A1,D0; get hardware version into D0 registry
-  ANDI.B 0xF,D0; mask last 4 bits in D0 (see only 4 last bits)
-  BEQ.B SUBROUTINE_Loop; if D0 == 0 then jump to SUBROUTINE_Loop, because there is no security lock.
+  ANDI.B 0x0F,D0; mask last 4 bits in D0 (see only 4 last bits)
+  BEQ.B 0x08; (Must be SUBROUTINE_Loop instead of 0x08) if D0 == 0 then jump to SUBROUTINE_Loop, because there is no security lock.
   MOVE.L "SEGA",A1; fill security lock with long word "SEGA" (ASCII - 0x53 0x45 0x47 0x41) into A1 address registry
 
 SUBROUTINE_Loop:
