@@ -1,5 +1,5 @@
-// Altered source code from blog article:
-// https://namelessalgorithm.com/genesis/blog/genesis/
+; Altered source code from blog article:
+; https://namelessalgorithm.com/genesis/blog/genesis/
 
 RomHeader:
     dc.l   $00FFFFFE        ; Initial stack pointer value
