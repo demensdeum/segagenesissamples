@@ -68,10 +68,10 @@ RomHeader:
     dc.l   ignore_handler   ; Unused (reserved)
 
     dc.b "SEGA GENESIS    " ; Console name
-    dc.b "(C) NAMELESS    " ; Copyrght holder and release date
-    dc.b "VERY MINIMAL GENESIS CODE BY NAMELESS ALGORITHM   " ; Domest. name
-    dc.b "VERY MINIMAL GENESIS CODE BY NAMELESS ALGORITHM   " ; Intern. name
-    dc.b "2018-07-02    "   ; Version number
+    dc.b "(C) Demensdeum  " ; Copyrght holder and release date
+    dc.b "Demensdeum Sega Genesis Hello World 2020          " ; Domest. name
+    dc.b "Demensdeum Sega Genesis Hello World 2020          " ; Intern. name
+    dc.b "2020-07-26    "   ; Version number
     dc.w $0000              ; Checksum
     dc.b "J               " ; I/O support
     dc.l $00000000          ; Start address of ROM
@@ -111,40 +111,53 @@ FillInitialStateForVDPRegistersLoop:
     add.w   #$0100,d1        ; Increment registry index +1 (by "binary adding" hex 100 (VDP control port registry mask))
     dbra    d0,FillInitialStateForVDPRegistersLoop ; Decrement until done
 
-CRAM
 VDPCRAMWriteColorAtIndex0:
     move.l  #$C0000000,vdp_control_port ; Asking to VDP access CRAM at byte 0 (bits from sega manual) ; #$C07f0000 last color index 127
-    move.w  #$000E,d0; Red color
+    move.w  #$0000,d0; Black color
     move.w  d0,vdp_data_port;
 
-VDPCRAMWriteColorAtIndex127:
-  move.l  #$C07f0000,vdp_control_port ; Asking to VDP access CRAM at byte 127 (bits from sega manual) ; #$C07f0000 last color index 127
-  move.w  #69,d0; Some color
-  move.w  d0,vdp_data_port;
+VDPCRAMWriteColorAtIndex1:
+    move.l  #$C0020000,vdp_control_port ; Asking to VDP access CRAM at byte 0 (bits from sega manual) ; #$C07f0000 last color index 127
+    move.w  #$00E,d0; Red color
+    move.w  d0,vdp_data_port;
 
-;VRAM
-VDPVRAMWritePattern:
-  move.l #vdp_vram_write_command,vdp_control_port; write to VRAM command
+ClearVRAM:
+  move.l #$40000000,vdp_control_port; write to VRAM command
+  move.w #16384,d0 ; counter
+ClearVRAMLoop:
+  move.l #$00000000,vdp_data_port;
+  dbra d0,ClearVRAMLoop
+
+CharactersVRAM:
   lea Characters,a0
-  move.w #7,d0
+  move.l #$40200000,vdp_control_port; write to VRAM command
+  move.w #7,d0 ; counter
+CharactersVRAMLoop:
+  move.l (a0)+,vdp_data_port;
+  dbra d0,CharactersVRAMLoop
 
-VDPVRAMWritePatternLoop:
-  move.l (a0)+,vdp_data_port; Move data to VDP data port, and increment source address
-  dbra d0,VDPVRAMWritePatternLoop
-
-  ;move.w #$2300,sr
-
-;ClearVRAM:
-;  move.l #vdp_vram_write_command,vdp_control_port;
-;  move.w #1,d0
-
-;ClearVRAMLoop:
-;  move.l d0,vdp_data_port
-;  dbra d0,ClearVRAMLoop
+FillBackground:
+  move.w #1,d0     ; tile index 1
+  move.l #$40000003,(vdp_control_port) ; initial drawing location
+  move.l #$6FF,d3     ; how many tiles to draw (1792 total)
+FillBackgroundLoop:
+  move.w  d0,(vdp_data_port)    ; copy the pattern to VPD
+  dbra    d3,FillBackgroundLoop    ; loop to next tile
 
 Stuck:
     nop
     jmp Stuck
+
+Characters:
+  dc.l $00000000
+  dc.l $01111100
+  dc.l $01000100
+  dc.l $01000100
+  dc.l $01000100
+  dc.l $01000100
+  dc.l $01111100
+  dc.l $00000000
+
 
 ; EXCEPTION AND INTERRUPT HANDLERS
 ; ----------------------------------------------------------------------------
@@ -154,16 +167,6 @@ ignore_handler
     rte ; return from exception (seems to restore PC)
 
     align 2 ; word-align code
-
-Characters:
-   dc.l $10000001
-   dc.l $20000002
-   dc.l $30000003
-   dc.l $40000004
-   dc.l $50000005
-   dc.l $60000006
-   dc.l $70000007
-   dc.l $80000008
 
 VDPRegisters:
   dc.b $14 ; 0x00:  H interrupt on, palettes on
