@@ -212,17 +212,42 @@ CharactersVRAMLoop:
   dbra d0,CharactersVRAMLoop
 
 FillBackground:
-  move.w #1,d0     ; tile index
+  move.w #0,d0     ; column index
+  move.w #1,d1     ; tile index
   move.l #$40000003,(vdp_control_port) ; initial drawing location
-  move.l #512,d3     ; how many tiles to draw (700 total)
-FillBackgroundLoop:
-  move.w  d0,(vdp_data_port)    ; copy the pattern to VPD
-  add.w #1,d0  
-  dbra    d3,FillBackgroundLoop    ; loop to next tile
+  move.l #2500,d7     ; how many tiles to draw (700 total)
+
+FillBackgroundStep:
+  cmp.w	#28,d0
+	ble.w	FillBackgroundStepFill
+
+FillBackgroundStep2:
+  cmp.w	#29,d0
+  bge.w	FillBackgroundStepSkip
+
+FillBackgroundStep3:
+  add #1,d0
+  cmp.w	#64,d0
+  bge.w	FillBackgroundStepNewRow
+  
+FillBackgroundStep4:
+  dbra d7,FillBackgroundStep    ; loop to next tile
 
 Stuck:
-    nop
-    jmp Stuck
+  nop
+  jmp Stuck
+
+FillBackgroundStepNewRow:
+  move.w #0,d0
+
+FillBackgroundStepFill:
+  move.w d1,(vdp_data_port)    ; copy the pattern to VPD
+  add #1,d1
+  jmp FillBackgroundStep2
+
+FillBackgroundStepSkip:
+  move.w #0,(vdp_data_port)    ; copy the pattern to VPD
+  jmp FillBackgroundStep3
 
 CRAMData:
     dc.l	$0CCA,$0CCA,$0CAA,$0A86,$0C42,$0EEE,$0444,$022C
@@ -233,7 +258,14 @@ CRAMData:
     align 2 ; word-align code
 
 ignore_handler
-    rte ; return from exception (seems to restore PC)
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    jmp ignore_handler
+    ;rte ; return from exception (seems to restore PC)
 
     align 2 ; word-align code
 
