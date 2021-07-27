@@ -4,68 +4,68 @@
 RomHeader:
     dc.l   $00FFFFFE        ; Initial stack pointer value
     dc.l   EntryPoint       ; Start of program
-    dc.l   ignore_handler   ; Bus error
-    dc.l   ignore_handler   ; Address error
-    dc.l   ignore_handler   ; Illegal instruction
-    dc.l   ignore_handler   ; Division by zero
-    dc.l   ignore_handler   ; CHK exception
-    dc.l   ignore_handler   ; TRAPV exception
-    dc.l   ignore_handler   ; Privilege violation
-    dc.l   ignore_handler   ; TRACE exception
-    dc.l   ignore_handler   ; Line-A emulator
-    dc.l   ignore_handler   ; Line-F emulator
-    dc.l   ignore_handler   ; Unused (reserved)
-    dc.l   ignore_handler   ; Unused (reserved)
-    dc.l   ignore_handler   ; Unused (reserved)
-    dc.l   ignore_handler   ; Unused (reserved)
-    dc.l   ignore_handler   ; Unused (reserved)
-    dc.l   ignore_handler   ; Unused (reserved)
-    dc.l   ignore_handler   ; Unused (reserved)
-    dc.l   ignore_handler   ; Unused (reserved)
-    dc.l   ignore_handler   ; Unused (reserved)
-    dc.l   ignore_handler   ; Unused (reserved)
-    dc.l   ignore_handler   ; Unused (reserved)
-    dc.l   ignore_handler   ; Unused (reserved)
-    dc.l   ignore_handler   ; Spurious exception
-    dc.l   ignore_handler   ; IRQ level 1
-    dc.l   ignore_handler   ; IRQ level 2
-    dc.l   ignore_handler   ; IRQ level 3
-    dc.l   ignore_handler   ; IRQ level 4 (horizontal retrace interrupt)
-    dc.l   ignore_handler   ; IRQ level 5
-    dc.l   ignore_handler   ; IRQ level 6 (vertical retrace interrupt)
-    dc.l   ignore_handler   ; IRQ level 7
-    dc.l   ignore_handler   ; TRAP #00 exception
-    dc.l   ignore_handler   ; TRAP #01 exception
-    dc.l   ignore_handler   ; TRAP #02 exception
-    dc.l   ignore_handler   ; TRAP #03 exception
-    dc.l   ignore_handler   ; TRAP #04 exception
-    dc.l   ignore_handler   ; TRAP #05 exception
-    dc.l   ignore_handler   ; TRAP #06 exception
-    dc.l   ignore_handler   ; TRAP #07 exception
-    dc.l   ignore_handler   ; TRAP #08 exception
-    dc.l   ignore_handler   ; TRAP #09 exception
-    dc.l   ignore_handler   ; TRAP #10 exception
-    dc.l   ignore_handler   ; TRAP #11 exception
-    dc.l   ignore_handler   ; TRAP #12 exception
-    dc.l   ignore_handler   ; TRAP #13 exception
-    dc.l   ignore_handler   ; TRAP #14 exception
-    dc.l   ignore_handler   ; TRAP #15 exception
-    dc.l   ignore_handler   ; Unused (reserved)
-    dc.l   ignore_handler   ; Unused (reserved)
-    dc.l   ignore_handler   ; Unused (reserved)
-    dc.l   ignore_handler   ; Unused (reserved)
-    dc.l   ignore_handler   ; Unused (reserved)
-    dc.l   ignore_handler   ; Unused (reserved)
-    dc.l   ignore_handler   ; Unused (reserved)
-    dc.l   ignore_handler   ; Unused (reserved)
-    dc.l   ignore_handler   ; Unused (reserved)
-    dc.l   ignore_handler   ; Unused (reserved)
-    dc.l   ignore_handler   ; Unused (reserved)
-    dc.l   ignore_handler   ; Unused (reserved)
-    dc.l   ignore_handler   ; Unused (reserved)
-    dc.l   ignore_handler   ; Unused (reserved)
-    dc.l   ignore_handler   ; Unused (reserved)
-    dc.l   ignore_handler   ; Unused (reserved)
+    dc.l   exception_handler   ; Bus error
+    dc.l   exception_handler   ; Address error
+    dc.l   exception_handler   ; Illegal instruction
+    dc.l   exception_handler   ; Division by zero
+    dc.l   exception_handler   ; CHK exception
+    dc.l   exception_handler   ; TRAPV exception
+    dc.l   exception_handler   ; Privilege violation
+    dc.l   exception_handler   ; TRACE exception
+    dc.l   exception_handler   ; Line-A emulator
+    dc.l   exception_handler   ; Line-F emulator
+    dc.l   exception_handler   ; Unused (reserved)
+    dc.l   exception_handler   ; Unused (reserved)
+    dc.l   exception_handler   ; Unused (reserved)
+    dc.l   exception_handler   ; Unused (reserved)
+    dc.l   exception_handler   ; Unused (reserved)
+    dc.l   exception_handler   ; Unused (reserved)
+    dc.l   exception_handler   ; Unused (reserved)
+    dc.l   exception_handler   ; Unused (reserved)
+    dc.l   exception_handler   ; Unused (reserved)
+    dc.l   exception_handler   ; Unused (reserved)
+    dc.l   exception_handler   ; Unused (reserved)
+    dc.l   exception_handler   ; Unused (reserved)
+    dc.l   exception_handler   ; Spurious exception
+    dc.l   exception_handler   ; IRQ level 1
+    dc.l   exception_handler   ; IRQ level 2
+    dc.l   exception_handler   ; IRQ level 3
+    dc.l   exception_handler   ; IRQ level 4 (horizontal retrace interrupt)
+    dc.l   exception_handler   ; IRQ level 5
+    dc.l   exception_handler   ; IRQ level 6 (vertical retrace interrupt)
+    dc.l   exception_handler   ; IRQ level 7
+    dc.l   exception_handler   ; TRAP #00 exception
+    dc.l   exception_handler   ; TRAP #01 exception
+    dc.l   exception_handler   ; TRAP #02 exception
+    dc.l   exception_handler   ; TRAP #03 exception
+    dc.l   exception_handler   ; TRAP #04 exception
+    dc.l   exception_handler   ; TRAP #05 exception
+    dc.l   exception_handler   ; TRAP #06 exception
+    dc.l   exception_handler   ; TRAP #07 exception
+    dc.l   exception_handler   ; TRAP #08 exception
+    dc.l   exception_handler   ; TRAP #09 exception
+    dc.l   exception_handler   ; TRAP #10 exception
+    dc.l   exception_handler   ; TRAP #11 exception
+    dc.l   exception_handler   ; TRAP #12 exception
+    dc.l   exception_handler   ; TRAP #13 exception
+    dc.l   exception_handler   ; TRAP #14 exception
+    dc.l   exception_handler   ; TRAP #15 exception
+    dc.l   exception_handler   ; Unused (reserved)
+    dc.l   exception_handler   ; Unused (reserved)
+    dc.l   exception_handler   ; Unused (reserved)
+    dc.l   exception_handler   ; Unused (reserved)
+    dc.l   exception_handler   ; Unused (reserved)
+    dc.l   exception_handler   ; Unused (reserved)
+    dc.l   exception_handler   ; Unused (reserved)
+    dc.l   exception_handler   ; Unused (reserved)
+    dc.l   exception_handler   ; Unused (reserved)
+    dc.l   exception_handler   ; Unused (reserved)
+    dc.l   exception_handler   ; Unused (reserved)
+    dc.l   exception_handler   ; Unused (reserved)
+    dc.l   exception_handler   ; Unused (reserved)
+    dc.l   exception_handler   ; Unused (reserved)
+    dc.l   exception_handler   ; Unused (reserved)
+    dc.l   exception_handler   ; Unused (reserved)
 
     dc.b "SEGA GENESIS    " ; Console name
     dc.b "(C) Demensdeum  " ; Copyrght holder and release date
@@ -229,7 +229,7 @@ FillBackgroundStep3:
   add #1,d0
   cmp.w	#64,d0
   bge.w	FillBackgroundStepNewRow
-  
+
 FillBackgroundStep4:
   dbra d7,FillBackgroundStep    ; loop to next tile
 
@@ -239,6 +239,7 @@ Stuck:
 
 FillBackgroundStepNewRow:
   move.w #0,d0
+  jmp FillBackgroundStep4
 
 FillBackgroundStepFill:
   move.w d1,(vdp_data_port)    ; copy the pattern to VPD
@@ -257,14 +258,14 @@ CRAMData:
 ; ----------------------------------------------------------------------------
     align 2 ; word-align code
 
-ignore_handler
+exception_handler
     nop
     nop
     nop
     nop
     nop
     nop
-    jmp ignore_handler
+    jmp exception_handler
     ;rte ; return from exception (seems to restore PC)
 
     align 2 ; word-align code
