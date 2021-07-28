@@ -111,90 +111,21 @@ FillInitialStateForVDPRegistersLoop:
     add.w   #$0100,d1        ; Increment registry index +1 (by "binary adding" hex 100 (VDP control port registry mask))
     dbra    d0,FillInitialStateForVDPRegistersLoop ; Decrement until done
 
-VDPCRAMWriteColorAtIndex0:
-    move.l  #$C0000000,vdp_control_port ; Asking to VDP access CRAM at byte 0 (bits from sega manual) ; #$C07f0000 last color index 127
-    move.w  #$0000,d0; Black color
-    move.w  d0,vdp_data_port;
+VDPCRAMFill:
+    move.l #$C0000000,d0
+    move.l  d0,vdp_control_port ; Asking to VDP access CRAM at byte 0 (bits from sega manual) ; #$C07f0000 last color index 127
+    move.w  #$0000,d1; Black color
+    move.w  d1,(vdp_data_port);
 
-VDPCRAMWriteColorAtIndex1:
-    move.l  #$C0020000,vdp_control_port ; Asking to VDP access CRAM at byte 0 (bits from sega manual) ; #$C07f0000 last color index 127
-    move.w  #$0CCA,d0; Red color
-    move.w  d0,vdp_data_port;
-
-VDPCRAMWriteColorAtIndex2:
-    move.l  #$C0040000,vdp_control_port ; Asking to VDP access CRAM at byte 0 (bits from sega manual) ; #$C07f0000 last color index 127
-    move.w  #$0CCA,d0; Red color
-    move.w  d0,vdp_data_port;
-
-VDPCRAMWriteColorAtIndex3:
-    move.l  #$C0060000,vdp_control_port ; Asking to VDP access CRAM at byte 0 (bits from sega manual) ; #$C07f0000 last color index 127
-    move.w  #$0CAA,d0; Red color
-    move.w  d0,vdp_data_port;
-
-VDPCRAMWriteColorAtIndex4:
-    move.l  #$C0080000,vdp_control_port ; Asking to VDP access CRAM at byte 0 (bits from sega manual) ; #$C07f0000 last color index 127
-    move.w  #$0A86,d0; Red color
-    move.w  d0,vdp_data_port;
-
-VDPCRAMWriteColorAtIndex5:
-    move.l  #$C00A0000,vdp_control_port ; Asking to VDP access CRAM at byte 0 (bits from sega manual) ; #$C07f0000 last color index 127
-    move.w  #$0C42,d0; Red color
-    move.w  d0,vdp_data_port;
-
-VDPCRAMWriteColorAtIndex6:
-    move.l  #$C00C0000,vdp_control_port ; Asking to VDP access CRAM at byte 0 (bits from sega manual) ; #$C07f0000 last color index 127
-    move.w  #$0EEE,d0; Red color
-    move.w  d0,vdp_data_port;
-
-VDPCRAMWriteColorAtIndex7:
-    move.l  #$C00E0000,vdp_control_port ; Asking to VDP access CRAM at byte 0 (bits from sega manual) ; #$C07f0000 last color index 127
-    move.w  #$0444,d0; Red color
-    move.w  d0,vdp_data_port;
-
-VDPCRAMWriteColorAtIndex8:
-    move.l  #$C0100000,vdp_control_port ; Asking to VDP access CRAM at byte 0 (bits from sega manual) ; #$C07f0000 last color index 127
-    move.w  #$022C,d0; Red color
-    move.w  d0,vdp_data_port;
-
-VDPCRAMWriteColorAtIndex9:
-    move.l  #$C0120000,vdp_control_port ; Asking to VDP access CRAM at byte 0 (bits from sega manual) ; #$C07f0000 last color index 127
-    move.w  #$0868,d0; Red color
-    move.w  d0,vdp_data_port;
-
-VDPCRAMWriteColorAtIndex10:
-    move.l  #$C0140000,vdp_control_port ; Asking to VDP access CRAM at byte 0 (bits from sega manual) ; #$C07f0000 last color index 127
-    move.w  #$0A88,d0; Red color
-    move.w  d0,vdp_data_port;
-
-VDPCRAMWriteColorAtIndex11:
-    move.l  #$C0160000,vdp_control_port ; Asking to VDP access CRAM at byte 0 (bits from sega manual) ; #$C07f0000 last color index 127
-    move.w  #$0CAC,d0; Red color
-    move.w  d0,vdp_data_port;
-
-VDPCRAMWriteColorAtIndex12:
-    move.l  #$C0180000,vdp_control_port ; Asking to VDP access CRAM at byte 0 (bits from sega manual) ; #$C07f0000 last color index 127
-    move.w  #$04AC,d0; Red color
-    move.w  d0,vdp_data_port;
-
-VDPCRAMWriteColorAtIndex13:
-    move.l  #$C01A0000,vdp_control_port ; Asking to VDP access CRAM at byte 0 (bits from sega manual) ; #$C07f0000 last color index 127
-    move.w  #$08AC,d0; Red color
-    move.w  d0,vdp_data_port;
-
-VDPCRAMWriteColorAtIndex14:
-    move.l  #$C01C0000,vdp_control_port ; Asking to VDP access CRAM at byte 0 (bits from sega manual) ; #$C07f0000 last color index 127
-    move.w  #$0484,d0; Red color
-    move.w  d0,vdp_data_port;
-
-VDPCRAMWriteColorAtIndex15:
-    move.l  #$C01E0000,vdp_control_port ; Asking to VDP access CRAM at byte 0 (bits from sega manual) ; #$C07f0000 last color index 127
-    move.w  #$0AEE,d0; Red color
-    move.w  d0,vdp_data_port;
-
-VDPCRAMWriteColorAtIndex16:
-    move.l  #$C0200000,vdp_control_port ; Asking to VDP access CRAM at byte 0 (bits from sega manual) ; #$C07f0000 last color index 127
-    move.w  #$0ACA,d0; Red color
-    move.w  d0,vdp_data_port;
+VDPCRAMFillLoop:
+    lea Colors,a0
+    move.l #15,d7
+VDPCRAMFillLoopStep:
+    add.l #131072,d0 ; increment address
+    move.l  d0,vdp_control_port ; Asking to VDP access CRAM at byte 0 (bits from sega manual) ; #$C07f0000 last color index 127
+    move.w  (a0)+,d1;
+    move.w  d1,(vdp_data_port);
+    dbra d7,VDPCRAMFillLoopStep
 
 ClearVRAM:
   move.l #$40000000,vdp_control_port; write to VRAM command
@@ -295,6 +226,24 @@ VDPRegisters:
   dc.b $00 ; 0x15: DMA source address lo byte
   dc.b $00 ; 0x16: DMA source address mid byte
   dc.b $80 ; 0x17: DMA source address hi byte, memory-to-VRAM mode (bits 6-7)
+
+Colors:
+  dc.w $0CCA
+  dc.w $0CCA
+  dc.w $0CAA
+  dc.w $0A86
+  dc.w $0C42
+  dc.w $0EEE
+  dc.w $0444
+  dc.w $022C
+	dc.w $0868
+  dc.w $0A88
+  dc.w $0CAC
+  dc.w $04AC
+  dc.w $08AC
+  dc.w $0484
+  dc.w $0AEE
+  dc.w $0ACA
 
 Characters:
   	dc.l	$11111111	; Tile #0
