@@ -64,17 +64,20 @@ FillBackground:
   move.l #$40000003,(vdp_control_port) ; initial drawing location
   move.l #2500,d7     ; how many tiles to draw (700 total)
 
+imageWidth = 28
+screenWidth = 64
+
 FillBackgroundStep:
-  cmp.w	#28,d0
+  cmp.w	#imageWidth,d0
 	ble.w	FillBackgroundStepFill
 
 FillBackgroundStep2:
-  cmp.w	#29,d0
-  bge.w	FillBackgroundStepSkip
+  cmp.w	#imageWidth,d0
+  bgt.w	FillBackgroundStepSkip
 
 FillBackgroundStep3:
   add #1,d0
-  cmp.w	#64,d0
+  cmp.w	#screenWidth,d0
   bge.w	FillBackgroundStepNewRow
 
 FillBackgroundStep4:
