@@ -37,10 +37,10 @@ VDPCRAMFillLoop:
     lea Colors,a0
     move.l #15,d7
 VDPCRAMFillLoopStep:
-    add.l #131072,d0 ; increment address
     move.l  d0,vdp_control_port ; Asking to VDP access CRAM at byte 0 (bits from sega manual) ; #$C07f0000 last color index 127
     move.w  (a0)+,d1;
     move.w  d1,(vdp_data_port);
+    add.l #131072,d0 ; increment address
     dbra d7,VDPCRAMFillLoopStep
 
 ClearVRAM:
@@ -53,7 +53,7 @@ ClearVRAMLoop:
 TilesVRAM:
   lea Tiles,a0
   move.l #$40200000,vdp_control_port; write to VRAM command
-  move.w #6488,d0 ; counter
+  move.w #6136,d0 ; (767 tiles * 8 rows) counter
 TilesVRAMLoop:
   move.l (a0)+,vdp_data_port;
   dbra d0,TilesVRAMLoop
@@ -62,9 +62,9 @@ FillBackground:
   move.w #0,d0     ; column index
   move.w #1,d1     ; tile index
   move.l #$40000003,(vdp_control_port) ; initial drawing location
-  move.l #2500,d7     ; how many tiles to draw (700 total)
+  move.l #2500,d7     ; how many tiles to draw (entire screen ~2500)
 
-imageWidth = 28
+imageWidth = 31
 screenWidth = 64
 
 FillBackgroundStep:
