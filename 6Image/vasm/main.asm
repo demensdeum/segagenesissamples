@@ -40,7 +40,7 @@ VDPCRAMFillLoopStep:
     move.l  d0,vdp_control_port ; Asking to VDP access CRAM at byte 0 (bits from sega manual) ; #$C07f0000 last color index 127
     move.w  (a0)+,d1;
     move.w  d1,(vdp_data_port);
-    add.l #131072,d0 ; increment address
+    add.l #$20000,d0 ; increment address
     dbra d7,VDPCRAMFillLoopStep
 
 ClearVRAM:
