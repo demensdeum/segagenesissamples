@@ -53,7 +53,7 @@ ClearVRAMLoop:
 SpriteVRAM:
   lea Sprite,a0
   move.l #$40200000,vdp_control_port; write to VRAM command
-  move.w #7,d0 ; (8 rows of sprite) counter
+  move.w #176,d0 ; (8 rows of sprite) counter
 SpriteVRAMLoop:
   move.l (a0)+,vdp_data_port;
   dbra d0,SpriteVRAMLoop
@@ -61,8 +61,8 @@ SpriteVRAMLoop:
 SpriteTable:
   move.l #$70000003,vdp_control_port
   move.w #$0100,vdp_data_port
-  move.w #$0400,vdp_data_port
-  move.w #$0000,vdp_data_port
+  move.w #$0F00,vdp_data_port
+  move.w #$0001,vdp_data_port
   move.w #$0100,vdp_data_port
 
 Stuck:
