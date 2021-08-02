@@ -53,7 +53,7 @@ ClearVRAMLoop:
 SpriteVRAM:
   lea Sprite,a0
   move.l #$40200000,vdp_control_port; write to VRAM command
-  move.w #176,d0 ; (8 rows of sprite) counter
+  move.w #128,d0 ; (16*8 rows of sprite) counter
 SpriteVRAMLoop:
   move.l (a0)+,vdp_data_port;
   dbra d0,SpriteVRAMLoop
